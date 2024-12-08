@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maris Racal & Anthony Jennings</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .content-card {
+            margin-top: 30px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 20px 0;
+        }
+        .footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .dropdown-menu {
+            min-width: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">About Maris Racal & Anthony Jennings</h1>
+        <div id="content" class="card content-card shadow-sm mx-auto p-4">
+            <p>Maris Racal is a multi-talented actress, singer, and songwriter. She gained fame for her unique charm and powerful vocals. Anthony Jennings is a rising actor known for his natural charisma and ability to captivate audiences with his performances. Together, they have inspired fans with their dedication and talent in the entertainment industry.</p>
+        </div>
+        <div class="text-center mt-4">
+            <h5>Choose Language:</h5>
+            <div class="dropdown d-inline">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    🌐 Select Language
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                    <li><button class="dropdown-item" onclick="changeLanguage('english')">English</button></li>
+                    <li><button class="dropdown-item" onclick="changeLanguage('filipino')">Filipino</button></li>
+                    <li><button class="dropdown-item" onclick="changeLanguage('spanish')">Spanish</button></li>
+                    <li><button class="dropdown-item" onclick="changeLanguage('french')">French</button></li>
+                    <li><button class="dropdown-item" onclick="changeLanguage('german')">German</button></li>
+                    <li><button class="dropdown-item" onclick="changeLanguage('japanese')">Japanese</button></li>
+                    <li><button class="dropdown-item" onclick="changeLanguage('chinese')">Chinese</button></li>
+                </ul>
+            </div>
+            <button class="btn btn-info mt-3" onclick="speakContent()">🔊 Speak</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center mt-5">
+        <div class="container">
+            <p>Created by <strong>Charles Pura</strong></p>
+            <p>
+                <a href="https://github.com/charlespura" target="_blank">@charlespura GitHub</a> | 
+                <a href="https://www.linkedin.com/in/charlespura" target="_blank">@charlespura LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const content = {
+            english: "Maris Racal is a multi-talented actress, singer, and songwriter. She gained fame for her unique charm and powerful vocals. Anthony Jennings is a rising actor known for his natural charisma and ability to captivate audiences with his performances. Together, they have inspired fans with their dedication and talent in the entertainment industry.",
+            filipino: "Si Maris Racal ay isang multi-talented na aktres, mang-aawit, at manunulat ng kanta. Nakilala siya dahil sa kanyang kakaibang karisma at makapangyarihang boses. Si Anthony Jennings ay isang sumisikat na aktor na kilala sa kanyang natural na karisma at kahusayan sa pag-arte. Magkasama, nakapagbigay sila ng inspirasyon sa kanilang mga tagahanga sa industriya ng libangan.",
+            spanish: "Maris Racal es una actriz, cantante y compositora muy talentosa. Es conocida por su encanto único y su poderosa voz. Anthony Jennings es un actor en ascenso conocido por su carisma natural y su capacidad para cautivar al público. Juntos inspiran a sus seguidores con su dedicación y talento.",
+            french: "Maris Racal est une actrice, chanteuse et auteure-compositrice multi-talentueuse. Elle est connue pour son charme unique et sa voix puissante. Anthony Jennings est un acteur en pleine ascension, reconnu pour son charisme naturel et sa capacité à captiver les spectateurs. Ensemble, ils inspirent leurs fans par leur dévouement et leur talent dans le monde du spectacle.",
+            german: "Maris Racal ist eine vielseitige Schauspielerin, Sängerin und Songwriterin. Sie wurde bekannt für ihren einzigartigen Charme und ihre kraftvolle Stimme. Anthony Jennings ist ein aufstrebender Schauspieler, der für seine natürliche Ausstrahlung und sein Talent bekannt ist, das Publikum zu fesseln. Gemeinsam inspirieren sie ihre Fans mit Hingabe und Talent.",
+            japanese: "マリス・ラカルは多才な女優、歌手、作詞家です。彼女はその独特な魅力と力強い歌声で知られています。アンソニー・ジェニングスは、自然な魅力と観客を惹きつける能力で知られる新進俳優です。二人はその献身と才能でファンを感動させています。",
+            chinese: "Maris Racal 是一位多才多艺的演员、歌手和作词家。她以独特的魅力和强大的歌喉而闻名。Anthony Jennings 是一位冉冉升起的演员，以其自然的魅力和吸引观众的能力而著称。他们以自己的奉献精神和才华激励着粉丝们。"
+        };
+
+        let currentLanguage = 'english';
+
+        function changeLanguage(language) {
+            currentLanguage = language;
+            document.getElementById("content").innerHTML = `<p>${content[language]}</p>`;
+        }
+
+        function speakContent() {
+            if (!window.speechSynthesis) {
+                alert("Your browser does not support text-to-speech functionality.");
+                return;
+            }
+
+            const text = content[currentLanguage];
+            const utterance = new SpeechSynthesisUtterance(text);
+
+            const langMap = {
+                english: "en-US",
+                filipino: "tl-PH",
+                spanish: "es-ES",
+                french: "fr-FR",
+                german: "de-DE",
+                japanese: "ja-JP",
+                chinese: "zh-CN"
+            };
+
+            utterance.lang = langMap[currentLanguage] || "en-US";
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
